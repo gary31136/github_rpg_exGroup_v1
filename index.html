@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
+  <title>RPG + AI</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <iframe class="content-frame" src="./game/index.html" title="RPG Game" allow="fullscreen"></iframe>
+    </div>
+
+    <div class="right-panel">
+      <iframe id="aiFrame" class="content-frame"
+        src="https://aintcu.ntcu.edu.tw:5170/chatbot-iframe/1d34b252-40d8-4ef4-9583-9981d78e1337" title="AI Assistant">
+      </iframe>
+
+      <div id="aiCover" class="ai-cover"></div>
+    </div>
+  </div>
+
+  <script>
+    function setAppHeight() {
+      document.documentElement.style.setProperty("--app-height", `${window.innerHeight}px`);
+    }
+
+    window.addEventListener("resize", setAppHeight);
+    window.addEventListener("orientationchange", setAppHeight);
+    setAppHeight();
+  </script>
+
+  <script>
+    let aiOpened = false;
+
+    function openAI() {
+      if (aiOpened) return;
+      aiOpened = true;
+
+      const cover = document.getElementById("aiCover");
+      if (cover) {
+        cover.style.display = "none";
+      }
+    }
+
+    window.addEventListener("message", function (event) {
+      if (event.data === "open-ai") {
+        openAI();
+      }
+    });
+  </script>
+</body>
+
+</html>
